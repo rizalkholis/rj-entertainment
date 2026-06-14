@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RJ Entertainment International — Japan–Indonesia Talent Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink:     #0E1014;
+  --gold:    #C5A55A;
+  --gold-lt: #E8D6A8;
+  --slate:   #1A1D24;
+  --slate2:  #22262F;
+  --fog:     #8A8D96;
+  --white:   #FFFFFF;
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'DM Sans', system-ui, sans-serif;
+  --mono:    'DM Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--ink); color: var(--white); overflow-x: hidden; font-size: 15px; line-height: 1.7; }
+
+/* ── NAV (single, no page tabs below) ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 60px;
+  background: rgba(14,16,20,0.95); backdrop-filter: blur(14px);
+  border-bottom: 0.5px solid rgba(197,165,90,0.2);
+}
+.nav-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; letter-spacing: 0.04em; color: var(--gold); text-decoration: none; cursor: pointer; }
+.nav-logo span { color: rgba(255,255,255,0.55); }
+
+/* nav links ARE the tabs — one set only */
+.nav-links { display: flex; gap: 0; }
+.nav-tab {
+  padding: 0 1.1rem; height: 60px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--fog); background: transparent; border: none;
+  border-bottom: 2px solid transparent; cursor: pointer;
+  white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+}
+.nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.nav-tab:hover { color: var(--white); }
+
+.nav-wa {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 16px; background: #25D366; color: #fff;
+  text-decoration: none; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase; transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.nav-wa:hover { opacity: 0.85; }
+.nav-wa svg { width: 15px; height: 15px; fill: #fff; flex-shrink: 0; }
+
+/* ── PAGES ── */
+.page { display: none; padding-top: 60px; }
+.page.active { display: block; }
+
+/* ── SHARED ── */
+.sec { padding: 5rem 2.5rem; }
+.sec-alt { background: var(--slate); }
+.eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 12px; }
+.eyebrow::before { content: ''; display: block; width: 24px; height: 0.5px; background: var(--gold); }
+.sec-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; max-width: 560px; }
+.sec-title em { font-style: italic; color: var(--gold); }
+.btn-gold { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; background: var(--gold); color: var(--ink); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; transition: opacity 0.2s; border: none; cursor: pointer; text-decoration: none; }
+.btn-gold:hover { opacity: 0.85; }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border: 0.5px solid rgba(255,255,255,0.2); color: var(--white); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; transition: border-color 0.2s, color 0.2s; background: none; cursor: pointer; text-decoration: none; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 2.5rem 80px; position: relative; overflow: hidden;
+}
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 80% 40%, rgba(197,165,90,0.07) 0%, transparent 60%), radial-gradient(ellipse 40% 50% at 10% 70%, rgba(44,50,64,0.5) 0%, transparent 70%); }
+.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(197,165,90,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(197,165,90,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+.hero-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; position: relative; display: flex; align-items: center; gap: 12px; }
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 0.5px; background: var(--gold); }
+.hero-h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 300; line-height: 1.05; max-width: 820px; position: relative; }
+.hero-h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { margin-top: 2rem; font-size: 15px; color: var(--fog); max-width: 500px; line-height: 1.8; position: relative; }
+.hero-actions { display: flex; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; position: relative; }
+
+/* ── STATS ── */
+.stats-bar { border-top: 0.5px solid rgba(197,165,90,0.2); border-bottom: 0.5px solid rgba(197,165,90,0.2); display: grid; grid-template-columns: repeat(4,1fr); }
+.stat { padding: 2rem; border-right: 0.5px solid rgba(197,165,90,0.2); }
+.stat:last-child { border-right: none; }
+.stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 300; color: var(--gold); line-height: 1; }
+.stat-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fog); margin-top: 4px; }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-card { background: var(--slate2); border: 0.5px solid rgba(197,165,90,0.2); padding: 2.5rem; position: relative; overflow: hidden; }
+.about-card::before { content: '日'; position: absolute; top: -1.5rem; right: 2rem; font-family: var(--serif); font-size: 5rem; color: rgba(197,165,90,0.07); line-height: 1; pointer-events: none; }
+.about-loc { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+.about-body { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.9; }
+.about-accent { margin-top: 2rem; padding-top: 1.5rem; border-top: 0.5px solid rgba(197,165,90,0.2); }
+.about-accent p { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--gold-lt); line-height: 1.6; }
+.vision-item { padding: 1.25rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.08); display: flex; gap: 1rem; }
+.vision-num { font-family: var(--mono); font-size: 10px; color: var(--gold); padding-top: 4px; min-width: 20px; }
+.vision-text { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+
+/* ── SERVICES ── */
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: rgba(197,165,90,0.2); border: 0.5px solid rgba(197,165,90,0.2); margin-top: 3rem; }
+.svc-card { background: var(--slate); padding: 2.5rem 2rem; transition: background 0.3s; position: relative; overflow: hidden; }
+.svc-card:hover { background: rgba(197,165,90,0.06); }
+.svc-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.svc-card:hover::after { transform: scaleX(1); }
+.svc-icon { width: 48px; height: 48px; border: 0.5px solid rgba(197,165,90,0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.4rem; }
+.svc-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.75rem; }
+.svc-body { font-size: 13px; color: var(--fog); line-height: 1.8; }
+.svc-tag { display: inline-block; margin-top: 1rem; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border: 0.5px solid rgba(197,165,90,0.3); padding: 3px 8px; }
+
+/* ── WHY ── */
+.why-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 6rem; }
+.why-item { padding: 1.5rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.08); display: grid; grid-template-columns: 28px 1fr; gap: 1rem; align-items: start; }
+.why-icon { width: 28px; height: 28px; border: 0.5px solid rgba(197,165,90,0.4); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--gold); margin-top: 2px; }
+.why-label { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.why-desc { font-size: 13px; color: var(--fog); line-height: 1.7; }
+.why-quote { background: rgba(197,165,90,0.07); border: 0.5px solid rgba(197,165,90,0.2); border-left: 2px solid var(--gold); padding: 2.5rem; align-self: center; }
+.why-quote p { font-family: var(--serif); font-size: 1.55rem; font-weight: 300; font-style: italic; color: var(--gold-lt); line-height: 1.5; }
+.why-quote cite { display: block; margin-top: 1.25rem; font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fog); font-style: normal; }
+
+/* ── TALENT PAGE ── */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.filter-btn { padding: 7px 14px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; border: 0.5px solid rgba(197,165,90,0.3); background: transparent; color: var(--fog); cursor: pointer; transition: all 0.2s; font-family: var(--mono); }
+.filter-btn.active, .filter-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+.talent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5px; background: rgba(197,165,90,0.15); border: 0.5px solid rgba(197,165,90,0.2); }
+.talent-card { background: var(--slate); cursor: pointer; transition: background 0.25s; position: relative; overflow: hidden; }
+.talent-card:hover { background: var(--slate2); }
+.talent-card:hover .tc-overlay { opacity: 1; }
+.tc-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; background: var(--slate2); }
+.tc-placeholder { width: 100%; aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, var(--slate2) 0%, #0E1014 100%); font-size: 4rem; color: rgba(197,165,90,0.2); }
+.tc-overlay { position: absolute; inset: 0; background: rgba(14,16,20,0.65); opacity: 0; transition: opacity 0.25s; display: flex; align-items: center; justify-content: center; }
+.tc-view-btn { padding: 10px 20px; background: var(--gold); color: var(--ink); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.tc-body { padding: 1rem 1.25rem 1.25rem; }
+.tc-badge { display: inline-block; margin-bottom: 7px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border: 0.5px solid rgba(197,165,90,0.35); padding: 2px 7px; }
+.tc-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; margin-bottom: 3px; }
+.tc-role { font-size: 11px; color: var(--fog); }
+
+.catalog-cta { margin-top: 3rem; display: flex; align-items: center; gap: 1.5rem; background: rgba(37,211,102,0.06); border: 0.5px solid rgba(37,211,102,0.2); padding: 1.5rem 2rem; flex-wrap: wrap; }
+.catalog-cta p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; max-width: 480px; }
+.catalog-cta p strong { color: var(--white); }
+.wa-btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; background: #25D366; color: #fff; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; transition: opacity 0.2s; flex-shrink: 0; }
+.wa-btn:hover { opacity: 0.85; }
+.wa-btn svg { width: 18px; height: 18px; fill: #fff; }
+
+/* ── PORTFOLIO ── */
+.port-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5px; background: rgba(197,165,90,0.15); border: 0.5px solid rgba(197,165,90,0.2); }
+.port-card { background: var(--slate); overflow: hidden; transition: background 0.2s; }
+.port-card:hover { background: var(--slate2); }
+.port-thumb { width: 100%; height: 170px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+.port-body { padding: 1.25rem; }
+.port-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.port-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; margin-bottom: 6px; }
+.port-desc { font-size: 12px; color: var(--fog); line-height: 1.7; }
+.port-meta { margin-top: 8px; font-family: var(--mono); font-size: 10px; color: rgba(197,165,90,0.5); }
+
+/* ── CONTACT ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.ci { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+.ci-icon { width: 36px; height: 36px; flex-shrink: 0; border: 0.5px solid rgba(197,165,90,0.3); display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--gold); }
+.ci-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fog); margin-bottom: 3px; }
+.ci-val { font-size: 14px; color: var(--white); }
+.ci-val a { color: var(--gold); text-decoration: none; }
+.ci-val a:hover { text-decoration: underline; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fog); }
+.form-group input, .form-group textarea, .form-group select { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.12); color: var(--white); padding: 12px 14px; font-family: var(--sans); font-size: 14px; outline: none; transition: border-color 0.2s; width: 100%; border-radius: 0; -webkit-appearance: none; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: rgba(197,165,90,0.6); }
+.form-group select option { background: var(--ink); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+/* ── TALENT MODAL ── */
+.modal-bg { position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.modal-bg.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--slate); border: 0.5px solid rgba(197,165,90,0.25); width: 100%; max-width: 760px; max-height: 90vh; overflow-y: auto; transform: translateY(20px); transition: transform 0.25s; position: relative; }
+.modal-bg.open .modal { transform: translateY(0); }
+.modal-inner { display: grid; grid-template-columns: 1fr 1.4fr; }
+.modal-photo { aspect-ratio: 2/3; display: flex; align-items: center; justify-content: center; background: var(--slate2); font-size: 5rem; color: rgba(197,165,90,0.2); overflow: hidden; }
+.modal-photo img { width: 100%; height: 100%; object-fit: cover; }
+.modal-content { padding: 2rem; }
+.modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.08); border: none; color: var(--white); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: background 0.2s; z-index: 10; }
+.modal-close:hover { background: rgba(197,165,90,0.2); }
+.modal-badge { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.modal-name { font-family: var(--serif); font-size: 2rem; font-weight: 300; line-height: 1.2; margin-bottom: 4px; }
+.modal-role-txt { font-size: 13px; color: var(--fog); margin-bottom: 1.5rem; }
+.modal-divider { height: 0.5px; background: rgba(197,165,90,0.2); margin: 1rem 0; }
+.modal-sec-title { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.modal-desc-txt { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 1rem; }
+.skill-pill { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border: 0.5px solid rgba(197,165,90,0.35); color: rgba(197,165,90,0.8); display: inline-block; margin: 2px; }
+
+/* ── WA FLOAT ── */
+.wa-float {
+  position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 300;
+}
+.wa-float-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 20px; background: #25D366; color: #fff;
+  text-decoration: none; font-size: 13px; font-weight: 500;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+  transition: opacity 0.2s; white-space: nowrap;
+}
+.wa-float-btn:hover { opacity: 0.9; }
+.wa-float-btn svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+
+/* ── FOOTER ── */
+footer { padding: 2rem 2.5rem; border-top: 0.5px solid rgba(197,165,90,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--gold); letter-spacing: 0.04em; }
+.footer-logo span { color: rgba(255,255,255,0.4); }
+.footer-copy { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--fog); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fog); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+
+/* reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* responsive */
+@media (max-width: 860px) {
+  .about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: repeat(2,1fr); }
+  .stat { border-right: none; border-bottom: 0.5px solid rgba(197,165,90,0.2); }
+  .services-grid { grid-template-columns: 1fr; }
+  .modal-inner { grid-template-columns: 1fr; }
+  .modal-photo { aspect-ratio: 16/9; }
+  .nav-links { display: none; }
+  nav { padding: 0 1.25rem; }
+  .sec { padding: 3.5rem 1.25rem; }
+  footer { padding: 1.5rem 1.25rem; }
+  #hero { padding: 100px 1.25rem 60px; }
+  .form-row-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 580px) { .hero-h1 { font-size: 2.8rem; } }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<!-- ── SINGLE NAV WITH TABS BUILT IN ── -->
+<nav>
+  <span class="nav-logo" onclick="go('home')">RJ<span> Entertainment</span></span>
+  <div class="nav-links">
+    <button class="nav-tab active" data-p="home">Home</button>
+    <button class="nav-tab" data-p="talent">Talent</button>
+    <button class="nav-tab" data-p="portfolio">Portfolio</button>
+    <button class="nav-tab" data-p="contact">Kontak</button>
+  </div>
+  <a href="https://wa.me/818048101712" target="_blank" class="nav-wa">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.094.537 4.065 1.481 5.782L.057 23.997l6.355-1.607A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.998a9.958 9.958 0 01-5.077-1.389l-.364-.216-3.769.953.987-3.652-.237-.374A9.962 9.962 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    WhatsApp
+  </a>
+</nav>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="pg-home" class="page active">
+
+  <div id="hero">
+    <div class="hero-bg"></div><div class="hero-grid"></div>
+    <div class="hero-eyebrow">Gotemba, Shizuoka — Japan</div>
+    <h1 class="hero-h1">Japan–Indonesia<br/>Talent <em>Management</em><br/>&amp; Cultural Solutions</h1>
+    <p class="hero-sub">Menghubungkan talenta profesional Jepang dengan industri kreatif, hiburan, dan korporat Indonesia — kepatuhan hukum penuh, eksekusi tanpa hambatan budaya.</p>
+    <div class="hero-actions">
+      <button class="btn-gold" onclick="go('talent')">Lihat Talent ↓</button>
+      <button class="btn-outline" onclick="go('contact')">Mulai Kolaborasi</button>
+    </div>
+  </div>
+
+  <div class="stats-bar reveal">
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Negara operasional</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Divisi layanan</div></div>
+    <div class="stat"><div class="stat-num">100<span style="font-size:1.4rem">%</span></div><div class="stat-label">Legal compliant</div></div>
+    <div class="stat"><div class="stat-num">B2B</div><div class="stat-label">Corporate-grade</div></div>
+  </div>
+
+  <div class="sec reveal">
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-loc">📍 Gotemba, Shizuoka, Japan</div>
+        <p class="about-body">RJ Entertainment adalah agensi manajemen bakat dan konsultan kemitraan inter-budaya berbasis di Gotemba, Shizuoka, Jepang. Kami mempertemukan talenta profesional Jepang dengan industri kreatif, hiburan, dan korporat Indonesia.</p>
+        <div class="about-accent"><p>"Jalur kolaborasi yang efisien — kepatuhan hukum internasional — eksekusi profesional tanpa hambatan budaya."</p></div>
+      </div>
+      <div>
+        <div class="eyebrow">Visi &amp; Misi</div>
+        <h2 class="sec-title">Mitra yang <em>paling tepercaya</em> di koridor Jepang–Indonesia</h2>
+        <div style="margin-top:1.5rem;">
+          <div class="vision-item"><div class="vision-num">01</div><div class="vision-text">Manajemen kerja yang transparan, aman, dan taat hukum bagi setiap talenta yang kami naungi.</div></div>
+          <div class="vision-item"><div class="vision-num">02</div><div class="vision-text">Menjadi mitra strategis klien dalam menyajikan talenta berkualitas tinggi tanpa miskomunikasi budaya.</div></div>
+          <div class="vision-item"><div class="vision-num">03</div><div class="vision-text">Standardisasi kerja yang tepat waktu dan terukur pada setiap proyek yang dijalankan.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec-alt reveal">
+    <div class="eyebrow">Layanan kami</div>
+    <h2 class="sec-title">Tiga pilar <em>eksekusi</em> tanpa hambatan</h2>
+    <div class="services-grid">
+      <div class="svc-card"><div class="svc-icon">🌟</div><h3 class="svc-title">Talent &amp; KOL Management</h3><p class="svc-body">Manajemen resmi tokoh publik dan KOL Jepang untuk kampanye digital, endorsement, hingga festival internasional.</p><span class="svc-tag">Endorsement · Festival · Campaign</span></div>
+      <div class="svc-card"><div class="svc-icon">🎙️</div><h3 class="svc-title">Bilingual Experts &amp; MC</h3><p class="svc-body">Interpreter bersertifikat Keigo dan MC profesional untuk rapat korporat, eksibisi B2B, dan konferensi pers.</p><span class="svc-tag">Interpreter · MC · B2B</span></div>
+      <div class="svc-card"><div class="svc-icon">🎬</div><h3 class="svc-title">Creative Content Production</h3><p class="svc-body">Kolaborasi kreator konten Jepang untuk materi promosi visual, ulasan produk, dan konten inter-budaya berstandar tinggi.</p><span class="svc-tag">Content · Visual · Brand</span></div>
+    </div>
+  </div>
+
+  <div class="sec reveal">
+    <div class="why-grid">
+      <div>
+        <div class="eyebrow">Keunggulan kami</div>
+        <h2 class="sec-title">Mengapa memilih <em>RJ Entertainment</em></h2>
+        <div style="margin-top:1rem;">
+          <div class="why-item"><div class="why-icon">⚖️</div><div><div class="why-label">Legal &amp; Immigration Compliance</div><div class="why-desc">Kontrak kerja internasional, perpajakan lokal, hingga Entertainer Visa secara resmi.</div></div></div>
+          <div class="why-item"><div class="why-icon">🤝</div><div><div class="why-label">Cultural Risk Mitigation</div><div class="why-desc">Meminimalkan risiko miskomunikasi berkat pemahaman mendalam bisnis di kedua negara.</div></div></div>
+          <div class="why-item"><div class="why-icon">✦</div><div><div class="why-label">Selective Talent Pool</div><div class="why-desc">Talent dikurasi ketat: profesionalisme, ketepatan waktu, dan komitmen pada objektif kontrak.</div></div></div>
+        </div>
+      </div>
+      <div class="why-quote">
+        <p>"Kami adalah jembatan kepercayaan antara dua ekosistem bisnis yang berbeda — memastikan setiap kolaborasi berjalan mulus dari kontrak hingga eksekusi di lapangan."</p>
+        <cite>— RJ Entertainment International, Gotemba, Shizuoka</cite>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">RJ<span> Entertainment International</span></div>
+    <div class="footer-copy">© 2025 RJ Entertainment International. Gotemba, Shizuoka, Japan.</div>
+    <div class="footer-links">
+      <a href="https://wa.me/818048101712" target="_blank">WhatsApp</a>
+      <a href="https://youtube.com/@RizalJapan" target="_blank">YouTube</a>
+      <a href="#" onclick="go('contact');return false;">Kontak</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════ TALENT ══════════ -->
+<div id="pg-talent" class="page">
+  <div class="sec">
+    <div style="max-width:600px; margin-bottom:2.5rem;">
+      <div class="eyebrow">Roster Talent</div>
+      <h2 class="sec-title">Kenali <em>talenta</em> kami</h2>
+      <p style="font-size:14px; color:var(--fog); margin-top:0.75rem; line-height:1.8;">KOL, MC bilingual, model, musisi, kreator konten, hingga aktor — siap untuk campaign, event, dan kolaborasi lintas Jepang–Indonesia.</p>
+    </div>
+
+    <div class="filter-bar" id="tf">
+      <button class="filter-btn active" data-c="all">Semua</button>
+      <button class="filter-btn" data-c="KOL">KOL / Influencer</button>
+      <button class="filter-btn" data-c="MC">MC / Host</button>
+      <button class="filter-btn" data-c="Model">Model</button>
+      <button class="filter-btn" data-c="Musisi">Musisi</button>
+      <button class="filter-btn" data-c="Kreator">Kreator Konten</button>
+      <button class="filter-btn" data-c="Aktor">Aktor / Aktris</button>
+    </div>
+
+    <div class="talent-grid" id="tgrid"></div>
+
+    <div class="catalog-cta">
+      <div>
+        <p><strong>Katalog lengkap via WhatsApp</strong><br/>Profil lengkap, rate card, dan ketersediaan semua talent tersedia di WA Catalog resmi kami.</p>
+      </div>
+      <a href="https://wa.me/c/818048101712" target="_blank" class="wa-btn">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.094.537 4.065 1.481 5.782L.057 23.997l6.355-1.607A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.998a9.958 9.958 0 01-5.077-1.389l-.364-.216-3.769.953.987-3.652-.237-.374A9.962 9.962 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Buka Katalog WA
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PORTFOLIO ══════════ -->
+<div id="pg-portfolio" class="page">
+  <div class="sec">
+    <div style="margin-bottom:2.5rem;">
+      <div class="eyebrow">Portfolio</div>
+      <h2 class="sec-title">Hasil karya &amp; <em>kolaborasi</em> kami</h2>
+    </div>
+    <div class="filter-bar" id="pf">
+      <button class="filter-btn active" data-c="all">Semua</button>
+      <button class="filter-btn" data-c="Campaign">Campaign</button>
+      <button class="filter-btn" data-c="Event">Event &amp; Festival</button>
+      <button class="filter-btn" data-c="Content">Konten Digital</button>
+      <button class="filter-btn" data-c="Korporat">Korporat B2B</button>
+    </div>
+    <div class="port-grid" id="pgrid"></div>
+  </div>
+</div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<div id="pg-contact" class="page">
+  <div class="sec sec-alt">
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow">Kontak &amp; lokasi</div>
+        <h2 class="sec-title">Mulai <em>kolaborasi</em> bersama kami</h2>
+        <div style="margin-top:2rem;">
+          <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-label">Headquarters</div><div class="ci-val">Gotemba, Shizuoka, Japan</div></div></div>
+          <div class="ci"><div class="ci-icon">📱</div><div><div class="ci-label">WhatsApp Business</div><div class="ci-val"><a href="https://wa.me/818048101712" target="_blank">+81 80-4810-1712</a></div></div></div>
+          <div class="ci"><div class="ci-icon">✉️</div><div><div class="ci-label">Corporate</div><div class="ci-val"><a href="mailto:corporate@rijaljapan.com">corporate@rijaljapan.com</a></div></div></div>
+          <div class="ci"><div class="ci-icon">✉️</div><div><div class="ci-label">Management</div><div class="ci-val"><a href="mailto:management@rjacademy.com">management@rjacademy.com</a></div></div></div>
+          <div class="ci"><div class="ci-icon">📋</div><div><div class="ci-label">WA Catalog Talent</div><div class="ci-val"><a href="https://wa.me/c/818048101712" target="_blank">Buka katalog</a></div></div></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:13px;color:var(--fog);margin-bottom:1.5rem;">Kirim pesan — kami merespons dalam 1×24 jam.</p>
+        <div class="form-row-2">
+          <div class="form-group"><label class="form-label">Nama / Perusahaan</label><input type="text" placeholder="PT Example Indonesia" /></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" placeholder="you@company.com" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Jenis kebutuhan</label><select><option value="">Pilih layanan...</option><option>Talent & KOL Management</option><option>Bilingual MC / Interpreter</option><option>Creative Content Production</option><option>Konsultasi umum</option></select></div>
+        <div class="form-group"><label class="form-label">Pesan</label><textarea placeholder="Ceritakan kebutuhan atau proyek Anda..."></textarea></div>
+        <button class="btn-gold" style="margin-top:0.5rem;" onclick="this.textContent='Terkirim ✓';this.style.background='#0F6E56';">Kirim pesan →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TALENT MODAL -->
+<div class="modal-bg" id="tmodal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-inner">
+      <div class="modal-photo" id="mpic"></div>
+      <div class="modal-content" id="mcontent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- WA FLOAT — direct link, no popup -->
+<a href="https://wa.me/818048101712" target="_blank" class="wa-float-btn" style="position:fixed;bottom:1.75rem;right:1.75rem;z-index:300;">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.094.537 4.065 1.481 5.782L.057 23.997l6.355-1.607A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.998a9.958 9.958 0 01-5.077-1.389l-.364-.216-3.769.953.987-3.652-.237-.374A9.962 9.962 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  Chat WA
+</a>
+
+<script>
+const WA = 'https://wa.me/818048101712';
+const TALENTS = [
+  {id:1,name:'Yuki Tanaka',cat:'KOL',role:'Lifestyle KOL · 280K Followers',emoji:'👩‍🦰',photo:'',bidang:['Instagram','YouTube','TikTok'],desc:'KOL terkemuka di niche lifestyle dan fashion Jepang dengan audiens utama wanita 20–35 tahun. Engagement rate rata-rata 7.2% di 3 platform.',skills:['Lifestyle','Fashion','Beauty','Travel','F&B Review']},
+  {id:2,name:'Kenji Mori',cat:'MC',role:'MC Bilingual · Keigo Certified',emoji:'🎙️',photo:'',bidang:['Corporate Event','Conference','Gala Dinner'],desc:'MC bilingual Jepang-Indonesia berpengalaman 8 tahun di event korporat Fortune 500 dan konferensi internasional.',skills:['Bilingual MC','Keigo','Corporate','B2B','Press Conf']},
+  {id:3,name:'Hana Sato',cat:'Model',role:'Fashion & Commercial Model',emoji:'👗',photo:'',bidang:['Print Ad','Runway','TVC'],desc:'Model komersial dan fashion dengan portfolio brand Jepang terkemuka. Berpengalaman untuk lookbook, campaign digital, dan TVC.',skills:['Runway','Commercial','Print','Lookbook','Digital Campaign']},
+  {id:4,name:'Ryu Nakamura',cat:'Musisi',role:'Musisi · Guitar & Vocal',emoji:'🎸',photo:'',bidang:['Live Performance','Recording','Event'],desc:'Musisi multi-instrumen (gitar, vokal) dengan nuansa J-Pop dan folk. Tampil di festival musik regional Jepang dan Asia Tenggara.',skills:['J-Pop','Acoustic','Live Show','Recording','Collaboration']},
+  {id:5,name:'Mika Yoshida',cat:'Kreator',role:'Konten Kreator · J-Culture',emoji:'📸',photo:'',bidang:['YouTube','Instagram','Brand Review'],desc:'Kreator konten spesialis budaya Jepang untuk audiens Indonesia — kuliner, wisata, dan gaya hidup Jepang.',skills:['Budaya Jepang','Kuliner','Travel Vlog','Review','Brand Collab']},
+  {id:6,name:'Sakura Ito',cat:'Aktor',role:'Aktris · Drama & Komersial',emoji:'🎭',photo:'',bidang:['TVC','Drama','Brand Ambassador'],desc:'Aktris muda berbakat dengan pengalaman di drama TV Jepang dan TVC brand multinasional di pasar Asia.',skills:['Drama','TVC','Brand Ambassador','Dubbing','Emosi']},
+  {id:7,name:'Takeshi Kato',cat:'KOL',role:'Tech & Gaming KOL · 150K',emoji:'🎮',photo:'',bidang:['YouTube','Twitch','TikTok'],desc:'KOL di niche teknologi, gadget, dan gaming dengan komunitas loyal. Cocok untuk launch produk elektronik dan game.',skills:['Tech Review','Gaming','Gadget','Unboxing','Community']},
+  {id:8,name:'Aiko Watanabe',cat:'MC',role:'Event Host · Bilingual',emoji:'🎤',photo:'',bidang:['Festival','Exhibition','Corporate'],desc:'Host energetik untuk festival budaya, pameran produk, dan event promosi. Fluent Jepang, Indonesia, dan Inggris dasar.',skills:['Festival Host','Exhibition','Trilingual','Energetik','Entertainment']},
+];
+const PORTFOLIO = [
+  {cat:'Campaign',emoji:'📱',bg:'#1A1D24',title:'Kampanye Digital Produk Kecantikan',client:'Brand Kosmetik Indonesia × KOL Jepang',year:'2024',desc:'Kolaborasi 3 KOL Jepang untuk kampanye peluncuran skincare di Indonesia. Total reach 1.2M dalam 2 minggu.',tags:['KOL','Instagram','Product Launch']},
+  {cat:'Event',emoji:'🎌',bg:'#1D1A24',title:'Japan Cultural Festival Jakarta',client:'KBRI Tokyo × Dinas Kebudayaan DKI',year:'2024',desc:'Manajemen MC bilingual dan 4 performer seni tradisional Jepang untuk festival budaya 3 hari di Jakarta Convention Center.',tags:['MC','Cultural','Festival']},
+  {cat:'Korporat',emoji:'🤝',bg:'#1A241D',title:'Business Summit Interpreter',client:'Asosiasi Pengusaha Indonesia–Jepang',year:'2024',desc:'Penyediaan 2 interpreter bersertifikat Keigo untuk summit B2B 2 hari, 200+ peserta, agenda negosiasi dan MoU.',tags:['Interpreter','B2B','Keigo']},
+  {cat:'Content',emoji:'🎬',bg:'#241A1A',title:'Seri Vlog "Kerja di Jepang"',client:'Platform Edukasi Online Indonesia',year:'2023',desc:'12 episode vlog bersama kreator Jepang, dokumentasi kehidupan dan tips kerja untuk pencari kerja Indonesia.',tags:['Vlog','YouTube','Edukasi']},
+  {cat:'Campaign',emoji:'🍜',bg:'#241D1A',title:'F&B Brand Ambassador Launch',client:'Jaringan Restoran Ramen Jepang',year:'2023',desc:'Rekrutmen brand ambassador untuk ekspansi franchise di 5 kota Indonesia, konten sosmed dan event opening.',tags:['Brand Ambassador','F&B','Event']},
+  {cat:'Korporat',emoji:'📊',bg:'#1A1A24',title:'Press Conference Produk Teknologi',client:'Perusahaan Elektronik Jepang',year:'2024',desc:'Press conference produk baru di Jakarta dengan MC bilingual, materi Bahasa Indonesia, dan koordinasi media lokal.',tags:['Press Conf','Tech','Bilingual']},
+];
+
+function go(p) {
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(x => x.classList.remove('active'));
+  document.getElementById('pg-' + p).classList.add('active');
+  const t = document.querySelector('[data-p="' + p + '"]');
+  if(t) t.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nav-tab').forEach(b => b.addEventListener('click', () => go(b.dataset.p)));
+
+function renderTalents(cat) {
+  const list = cat==='all' ? TALENTS : TALENTS.filter(t=>t.cat===cat);
+  document.getElementById('tgrid').innerHTML = list.map(t => {
+    const img = t.photo ? `<img class="tc-img" src="${t.photo}" alt="${t.name}" loading="lazy" />` : `<div class="tc-placeholder">${t.emoji}</div>`;
+    return `<div class="talent-card" onclick="openModal(${t.id})">
+      ${img}
+      <div class="tc-overlay"><div class="tc-view-btn">Lihat Profil</div></div>
+      <div class="tc-body">
+        <div class="tc-badge">${t.cat}</div>
+        <div class="tc-name">${t.name}</div>
+        <div class="tc-role">${t.role}</div>
+        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px;">
+          ${t.bidang.map(b=>`<span style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:.5px solid rgba(197,165,90,.2);color:rgba(197,165,90,.55);">${b}</span>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+renderTalents('all');
+document.querySelectorAll('#tf .filter-btn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#tf .filter-btn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); renderTalents(b.dataset.c);
+}));
+
+function openModal(id) {
+  const t = TALENTS.find(x=>x.id===id);
+  const img = t.photo ? `<img src="${t.photo}" alt="${t.name}" style="width:100%;height:100%;object-fit:cover;" />` : t.emoji;
+  document.getElementById('mpic').innerHTML = img;
+  document.getElementById('mcontent').innerHTML = `
+    <div class="modal-badge">${t.cat}</div>
+    <div class="modal-name">${t.name}</div>
+    <div class="modal-role-txt">${t.role}</div>
+    <div class="modal-divider"></div>
+    <div class="modal-sec-title">Tentang</div>
+    <div class="modal-desc-txt">${t.desc}</div>
+    <div class="modal-sec-title">Keahlian</div>
+    <div style="margin-bottom:1rem;">${t.skills.map(s=>`<span class="skill-pill">${s}</span>`).join('')}</div>
+    <div class="modal-sec-title">Platform / Area</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;">
+      ${t.bidang.map(b=>`<span style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;background:rgba(197,165,90,.08);border:.5px solid rgba(197,165,90,.25);color:var(--gold-lt);">${b}</span>`).join('')}
+    </div>
+    <a href="${WA}?text=${encodeURIComponent('Halo RJ Entertainment, saya tertarik booking '+t.name+' ('+t.cat+'). Bisa info lebih lanjut?')}" target="_blank" class="wa-btn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.094.537 4.065 1.481 5.782L.057 23.997l6.355-1.607A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.998a9.958 9.958 0 01-5.077-1.389l-.364-.216-3.769.953.987-3.652-.237-.374A9.962 9.962 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Booking ${t.name}
+    </a>`;
+  document.getElementById('tmodal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('tmodal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderPort(cat) {
+  const list = cat==='all' ? PORTFOLIO : PORTFOLIO.filter(p=>p.cat===cat);
+  document.getElementById('pgrid').innerHTML = list.map(p=>`
+    <div class="port-card">
+      <div class="port-thumb" style="background:${p.bg};">${p.emoji}</div>
+      <div class="port-body">
+        <div class="port-tag">${p.cat} · ${p.year}</div>
+        <div class="port-title">${p.title}</div>
+        <div class="port-desc">${p.desc}</div>
+        <div class="port-meta">${p.client}</div>
+        <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px;">
+          ${p.tags.map(t=>`<span style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:2px 8px;border:.5px solid rgba(197,165,90,.2);color:rgba(197,165,90,.55);">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>`).join('');
+}
+renderPort('all');
+document.querySelectorAll('#pf .filter-btn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#pf .filter-btn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); renderPort(b.dataset.c);
+}));
+
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }), {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
